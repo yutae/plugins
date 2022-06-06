@@ -1,3 +1,21 @@
+## 2.1.7
+
+* Updates code for stricter analysis options.
+* Removes unnecessary imports.
+
+## 2.1.6
+
+* Migrates from `ui.hash*` to `Object.hash*`.
+* Updates minimum Flutter version to 2.5.0.
+
+## 2.1.5
+
+Removes dependency on `meta`.
+
+## 2.1.4
+
+* Update to use the `verify` method introduced in plugin_platform_interface 2.1.0.
+
 ## 2.1.3
 
 * `LatLng` constructor maintains longitude precision when given within

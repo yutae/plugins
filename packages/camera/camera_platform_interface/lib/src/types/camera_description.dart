@@ -3,7 +3,6 @@
 // found in the LICENSE file.
 
 import 'package:flutter/foundation.dart';
-import 'package:meta/meta.dart';
 
 /// The direction the camera is facing.
 enum CameraLensDirection {
@@ -51,7 +50,7 @@ class CameraDescription {
           lensDirection == other.lensDirection;
 
   @override
-  int get hashCode => name.hashCode ^ lensDirection.hashCode;
+  int get hashCode => Object.hash(name, lensDirection);
 
   @override
   String toString() {

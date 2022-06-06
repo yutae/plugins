@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:flutter/widgets.dart';
 import 'package:quiver/core.dart';
 
 /// Default configuration options to use when signing in.
@@ -20,6 +21,42 @@ enum SignInOption {
   ///
   /// See also https://developers.google.com/android/reference/com/google/android/gms/auth/api/signin/GoogleSignInOptions.html#public-static-final-googlesigninoptions-default_games_sign_in.
   games
+}
+
+/// The parameters to use when initializing the sign in process.
+///
+/// See:
+/// https://developers.google.com/identity/sign-in/web/reference#gapiauth2initparams
+@immutable
+class SignInInitParameters {
+  /// The parameters to use when initializing the sign in process.
+  const SignInInitParameters({
+    this.scopes = const <String>[],
+    this.signInOption = SignInOption.standard,
+    this.hostedDomain,
+    this.clientId,
+    this.forceCodeForRefreshToken = false,
+  });
+
+  /// The list of OAuth scope codes to request when signing in.
+  final List<String> scopes;
+
+  /// The user experience to use when signing in. [SignInOption.games] is
+  /// only supported on Android.
+  final SignInOption signInOption;
+
+  /// Restricts sign in to accounts of the user in the specified domain.
+  /// By default, the list of accounts will not be restricted.
+  final String? hostedDomain;
+
+  /// The client ID to use when signing in.
+  final String? clientId;
+
+  /// If true, ensures the authorization code can be exchanged for an access
+  /// token.
+  ///
+  /// This is only used on Android.
+  final bool forceCodeForRefreshToken;
 }
 
 /// Holds information about the signed in user.
@@ -71,13 +108,21 @@ class GoogleSignInUserData {
   String? serverAuthCode;
 
   @override
+  // TODO(stuartmorgan): Make this class immutable in the next breaking change.
+  // ignore: avoid_equals_and_hash_code_on_mutable_classes
   int get hashCode => hashObjects(
       <String?>[displayName, email, id, photoUrl, idToken, serverAuthCode]);
 
   @override
-  bool operator ==(dynamic other) {
-    if (identical(this, other)) return true;
-    if (other is! GoogleSignInUserData) return false;
+  // TODO(stuartmorgan): Make this class immutable in the next breaking change.
+  // ignore: avoid_equals_and_hash_code_on_mutable_classes
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! GoogleSignInUserData) {
+      return false;
+    }
     final GoogleSignInUserData otherUserData = other;
     return otherUserData.displayName == displayName &&
         otherUserData.email == email &&
@@ -107,12 +152,20 @@ class GoogleSignInTokenData {
   String? serverAuthCode;
 
   @override
+  // TODO(stuartmorgan): Make this class immutable in the next breaking change.
+  // ignore: avoid_equals_and_hash_code_on_mutable_classes
   int get hashCode => hash3(idToken, accessToken, serverAuthCode);
 
   @override
-  bool operator ==(dynamic other) {
-    if (identical(this, other)) return true;
-    if (other is! GoogleSignInTokenData) return false;
+  // TODO(stuartmorgan): Make this class immutable in the next breaking change.
+  // ignore: avoid_equals_and_hash_code_on_mutable_classes
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! GoogleSignInTokenData) {
+      return false;
+    }
     final GoogleSignInTokenData otherTokenData = other;
     return otherTokenData.idToken == idToken &&
         otherTokenData.accessToken == accessToken &&

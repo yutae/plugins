@@ -1,3 +1,25 @@
+## 2.2.0
+
+* Adds image streaming to the platform interface.
+* Removes unnecessary imports.
+
+## 2.1.6
+
+* Adopts `Object.hash`.
+* Removes obsolete dependency on `pedantic`.
+
+## 2.1.5
+
+* Fixes asynchronous exceptions handling of the `initializeCamera` method.
+
+## 2.1.4
+
+* Removes dependency on `meta`.
+
+## 2.1.3
+
+*  Update to use the `verify` method introduced in platform_plugin_interface 2.1.0.
+
 ## 2.1.2
 
 * Adopts new analysis options and fixes all violations.
